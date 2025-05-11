@@ -1,0 +1,33 @@
+RAM Allocation [bytes]
+Variable                                                                          Address   Size
+------------------------------------------------------------------------------------------------
+symCodes                                                                          0x0A00      64
+
+EEPROM Allocation [bytes]
+Variable                                                                          Address   Size
+------------------------------------------------------------------------------------------------
+
+Register Allocation
+Variable                                                                          Register  Size
+------------------------------------------------------------------------------------------------
+y                                                                                 R4           1
+x                                                                                 R3           1
+lines                                                                             R6           1
+frame                                                                             R7,R8        2
+
+FLASH Allocation [words]
+Function                                                                          Address   Size
+------------------------------------------------------------------------------------------------
+main                                                                              0x04259    356
+LCD_send_command                                                                  0x043BD     34
+LCD_on                                                                            0x043DF      2
+LCD_goto                                                                          0x043E1     31
+LCD_putc                                                                          0x04400      7
+LCD_puts                                                                          0x04407     16
+LCD_CGRAM                                                                         0x04417     25
+LCD_init                                                                          0x04430     45
+put_buff_G100                                                                     0x0445D     56
+_print_G100                                                                       0x04495    316
+sprintf                                                                           0x045D1     54
+strlen                                                                            0x04607     12
+strlenf                                                                           0x04613     13
