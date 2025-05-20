@@ -1,0 +1,41 @@
+LCD_init();
+LCD_on();
+LCD_goto(0, 0);
+LCD_putc(0);
+LCD_putc(1);
+LCD_putc(2);
+LCD_putc(3);
+LCD_goto(0, 1);
+LCD_putc(4);
+LCD_putc(5);
+LCD_putc(6);
+LCD_putc(7);
+while (1)
+{
+    // Place your code here
+    //LCD_goto(0, 0);
+    for (y = 0; y < 2; y++) {
+        for (x = 0; x < 4; x++) {
+            for (lines = 0; lines < 8; lines++) {
+                switch (x)
+                {
+                case 0:symCodes[x + (y * 4)][lines] = arr1[frame * 48 + y * 24 + lines * 3] >> 3; break;
+                case 1:symCodes[x + (y * 4)][lines] = arr1[frame * 48 + y * 24 + lines * 3] << 2 | arr1[frame * 48 + y * 24 + lines * 3 + 1] >> 6; break;
+                case 2:symCodes[x + (y * 4)][lines] = arr1[frame * 48 + y * 24 + lines * 3 + 1] >> 1; break;
+                case 3:symCodes[x + (y * 4)][lines] = arr1[frame * 48 + y * 24 + lines * 3 + 1] << 4 | arr1[frame * 48 + y * 24 + lines * 3 + 2] >> 4; break;
+                default:
+                    break;
+                }
+                //symCodes[x + (y * 4)][lines] = arr1[(x + (y * 4)) * 8 + lines];
+            }
+            LCD_CGRAM((x + (y * 4)) * 8, symCodes[x + (y * 4)]);
+            LCD_goto(x, y);
+            LCD_putc((x + (y * 4)));
+        }
+    }
+    LCD_goto(0, 2);
+    sprintf(str, "%4d", frame);
+    LCD_puts(str);
+    frame++;
+    if(frame==699)frame=0;
+}
