@@ -21,4 +21,4 @@ v2 - fixed issue with 1365th frame caused by 16bit integer overflow.
      - added foler FramesArrayEditor.
      - added 3 functions: LCD_CGRAM64 and LCD_CGRAM64_blank which help increase max fps to 16,440 fps. GetData function to get data.
      - arr1 divided to 3 parts due max size of arrays 64kb and max size 2^16.
-     - Instead of 700 frames playe on whatever it was before fps, now it plays 3281 frames with consistanly 15 fps.
+     - Instead of 700 frames playe on whatever it was before fps, now it plays 3281 frames with consistanly 15 fps.https://youtu.be/e4uItfHdT-Q
