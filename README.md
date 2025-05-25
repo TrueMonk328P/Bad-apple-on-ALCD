@@ -21,11 +21,19 @@ Change log:
 v1 - just first version. nothing to change.
 
 v2 - fixed issue with 1365th frame caused by 16bit integer overflow.
+
      - added foler FramesArrayEditor.
+     
      - added 3 functions: LCD_CGRAM64 and LCD_CGRAM64_blank which help increase max fps to 16.440 fps. GetData function to get data.
+     
      - arr1 divided to 3 parts due max size of arrays 64kb and max size 2^16.
+     
      - Instead of 700 frames playe on whatever it was before fps, now it plays 3281 frames with consistanly 15 fps.https://youtu.be/e4uItfHdT-Q
+     
 v3 - LCD functions was rewrited according datasheet for st7066u which increased max fps to 58.484 fps. (tag wasn't released)
+
 v3.1 - All values in delays functions on most LCD functions changed to constants for easier tweaking.
+
      - Frame processing was moved from infinite loop to tim1_ocra interrupt function. For a precision timing beatween frames stabilizer was added.
+     
      - max fps increased to 69(nice).888 fps. That mean you can run 30fps video using 4bit data bus.
