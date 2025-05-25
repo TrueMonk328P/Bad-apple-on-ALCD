@@ -22,7 +22,7 @@ Data Stack size         : 2048
 
 #include <mega2560.h>
 #include <delay.h>
-#include <stdio.h>
+//#include <stdio.h>
 
 // Declare your global variables here
 #define E 0
@@ -43,10 +43,12 @@ void LCD_CGRAM64_blank(void);
 void LCD_init(void);
 unsigned char GetData(unsigned char s, unsigned short l);
 
-char symCodes[64] = { 0 };//[8][8]
-unsigned char part = 0, y = 0, x = 0, lines = 0;
-unsigned short frame = 0;//, addfframe = 0;
-//unsigned char str[6] = { 0 };
+char symCodes[64] = { 0 };
+unsigned char part = 0, y = 0, x = 0, lines = 0, stb = 0;
+unsigned short frame = 0;//, millis = 0, movf = 0, framecount = 0, fovf = 0;
+//unsigned char str[10] = { 0 };
+const unsigned char etime = 80, shrDelay = 37;
+//const unsigned short lngDelay = 1520;
 
 //                       65520=1365*48
 flash unsigned char arr1[65520] = { 
@@ -16785,56 +16787,108 @@ void main(void)
     LCD_putc(5);
     LCD_putc(6);
     LCD_putc(7);
+
+    /*TCCR0A = (0 << COM0A1) | (0 << COM0A0) | (0 << COM0B1) | (0 << COM0B0) | (1 << WGM01) | (0 << WGM00);
+    TCCR0B = (0 << WGM02) | (0 << CS02) | (1 << CS01) | (1 << CS00);
     
+    OCR0A = 250;
+    
+    TIMSK0 = (0 << OCIE0B) | (1 << OCIE0A) | (0 << TOIE0);*/
+
+    TCCR1A = (0 << COM1A1) | (0 << COM1A0) | (0 << COM1B1) | (0 << COM1B0) | (0 << COM1C1) | (0 << COM1C0) | (0 << WGM11) | (0 << WGM10);
+    TCCR1B = (0 << ICNC1) | (0 << ICES1) | (0 << WGM13) | (1 << WGM12) | (0 << CS12) | (1 << CS11) | (1 << CS10);
+    
+    OCR1AH = 0x41;
+    OCR1AL = 0x1A;//I will add stabilizer later for 16666 16666 16667 thing
+    
+    TIMSK1 = (0 << ICIE1) | (0 << OCIE1C) | (0 << OCIE1B) | (1 << OCIE1A) | (0 << TOIE1);
+
+    SREG |= 1 << 7;
     while (1)
     {
         // Place your code here
-        for (y = 0; y < 2; y++) {
-            for (x = 0; x < 4; x++) {
-                for (lines = 0; lines < 8; lines++) {
-                    switch (x)
-                    {
-                    case 0:symCodes[y * 32 + x * 8 + lines] = GetData(part, frame * 48 + y * 24 + lines * 3) >> 3; break;
-                    case 1:symCodes[y * 32 + x * 8 + lines] = GetData(part, frame * 48 + y * 24 + lines * 3) << 2 | GetData(part, frame * 48 + y * 24 + lines * 3 + 1) >> 6; break;
-                    case 2:symCodes[y * 32 + x * 8 + lines] = GetData(part, frame * 48 + y * 24 + lines * 3 + 1) >> 1; break;
-                    case 3:symCodes[y * 32 + x * 8 + lines] = GetData(part, frame * 48 + y * 24 + lines * 3 + 1) << 4 | GetData(part, frame * 48 + y * 24 + lines * 3 + 2) >> 4; break;
-                    default:
-                        break;
-                    }
-                    //0-7 8-15 16-23 24-31
-                    //32-39 40-47 48-55 56-63
-                }
-            }
-        }
-        LCD_CGRAM64(symCodes);
-        //LCD_goto(0, 2);
-        //sprintf(str, "%4d", frame + addfframe);
-        //LCD_puts(str);
-        delay_ms(6);
-        delay_us(944);
-        frame++;
-        if (part == 2 && frame == 550) {
-            part = 0;
-            frame = 0;
-            //addfframe = 0;
-            //delay_ms(1000);
-        }
-        if (frame == 1365) {
-            frame = 0;
-            //addfframe += 1366;
-            part++;
-        }
-        //3:38,7(3)=3281/15
-        //3:25 without delays with frame counter, there is no consistant delay
-        //3:11.938 without delays without frame counter, delay should be 8,166ms
-        
+        //code moved in tim1_coma
+        /*if (framecount == 65535)fovf++;
+        if ((framecount == 34463) && (fovf == 1)) {
+            SREG &= ~(1 << 7);
+            break;
+        }*/
+        //v2 speedtest
+        //frame/time/fps
         //   1 59ms     16,949
         //   9 537ms    16,760
         //  99 5912ms   16,746
         // 999 59663ms  16,440
         //9999 597168ms 16,440
+        //v3 speedtest
+        //    1 17ms      58,823
+        //    9 153ms     58,823
+        //   99 1690ms    58,579
+        //  999 17059ms   58,561
+        // 9999 170969ms  58,484
+        //99999 1709851ms 58,484
+        //v3.1
+        // 9999 143070ms  69,888
+        //99999 1426207ms 70,115
+    }
+    /*LCD_clr();
+    LCD_goto(0, 0);
+    LCD_putc(movf / 10 % 10 + '0');
+    LCD_putc(movf % 10 + '0');
+    LCD_putc(' ');
+    LCD_putc(millis / 10000 % 10 + '0');
+    LCD_putc(millis / 1000 % 10 + '0');
+    LCD_putc(millis / 100 % 10 + '0');
+    LCD_putc(millis / 10 % 10 + '0');
+    LCD_putc(millis % 10 + '0');*/
+}
+
+interrupt [18] void tim1_coma (void)
+{
+    for (y = 0; y < 2; y++) {
+        for (x = 0; x < 4; x++) {
+            for (lines = 0; lines < 8; lines++) {
+                switch (x)
+                {
+                case 0:symCodes[y * 32 + x * 8 + lines] = GetData(part, frame * 48 + y * 24 + lines * 3) >> 3; break;
+                case 1:symCodes[y * 32 + x * 8 + lines] = GetData(part, frame * 48 + y * 24 + lines * 3) << 2 | GetData(part, frame * 48 + y * 24 + lines * 3 + 1) >> 6; break;
+                case 2:symCodes[y * 32 + x * 8 + lines] = GetData(part, frame * 48 + y * 24 + lines * 3 + 1) >> 1; break;
+                case 3:symCodes[y * 32 + x * 8 + lines] = GetData(part, frame * 48 + y * 24 + lines * 3 + 1) << 4 | GetData(part, frame * 48 + y * 24 + lines * 3 + 2) >> 4; break;
+                default:
+                    break;
+                }
+                //0-7 8-15 16-23 24-31
+                //32-39 40-47 48-55 56-63
+            }
+        }
+    }
+    LCD_CGRAM64(symCodes);
+    frame++;
+    //framecount++;
+    if (part == 2 && frame == 550) {
+        part = 0;
+        frame = 0;
+    }
+    if (frame == 1365) {
+        frame = 0;
+        part++;
+    }
+    //stabilizator
+    stb++;
+    switch (stb) {
+    case 0:OCR1AL -= 1; break;
+    case 1:break;
+    case 2:OCR1AL += 1; break;
+    case 3:stb = 0; break;
+    default:TIMSK1 &= ~(1 << OCIE1A);
     }
 }
+
+//interrupt [22] void tim0_coma (void)
+//{
+//    millis++;
+//    if (millis == 65535)movf++;
+//}
 
 void LCD_send_command(unsigned char dat, unsigned char rs, unsigned char rw) {
     if (rs == 1) PORTK |= 1 << RS;
@@ -16844,22 +16898,23 @@ void LCD_send_command(unsigned char dat, unsigned char rs, unsigned char rw) {
     else PORTK &= ~(1 << RW);
     DB = dat;
     
-    PORTK |= 1 << E; delay_us(450);
-    PORTK &= ~(1 << E); delay_us(450);
-    //PORTK &= ~(1 << RS);
-    //PORTK &= ~(1 << RW);
+    PORTK |= 1 << E; delay_us(etime);
+    PORTK &= ~(1 << E); delay_us(etime);
 }
 
 void LCD_clr(void) {
     LCD_send_command(0b00000001, 0, 0);
+    delay_us(1520);
 }
 
 void LCD_on(void) {
     LCD_send_command(0b00001100, 0, 0);
+    delay_us(shrDelay);
 }
 
 void LCD_off(void) {
     LCD_send_command(0b00001000, 0, 0);
+    delay_us(shrDelay);
 }
 
 void LCD_goto(char x, char y) {
@@ -16871,75 +16926,71 @@ void LCD_goto(char x, char y) {
     default:break;
     }
     LCD_send_command(x | (1 << 7), 0, 0);
+    delay_us(shrDelay);
 }
 
 void LCD_putc(unsigned char c) {
     LCD_send_command(c, 1, 0);
+    delay_us(shrDelay);
 }
 
-void LCD_puts(char* s) {
+void LCD_puts(unsigned char* s) {
     while (*s) {
-        LCD_send_command(*s++, 1, 0);
+        LCD_putc(*s++);
     }
 }
 
 void LCD_CGRAM(char adr, char sym[8]) {
     char i;
     LCD_send_command(adr | 1 << 6, 0, 0);
+    delay_us(shrDelay);
     for (i = 0; i < 8; i++) {
-        LCD_send_command(sym[i], 1, 0);
+        LCD_putc(sym[i]);
     }
 }
 
 void LCD_CGRAM64(char sym[64]) {
     char i;
     LCD_send_command(1 << 6, 0, 0);
+    delay_us(shrDelay);
     for (i = 0; i < 64; i++) {
-        LCD_send_command(sym[i], 1, 0);
+        LCD_putc(sym[i]);
     }
 }
 
 void LCD_CGRAM64_blank(void) {
     char i;
     LCD_send_command(1 << 6, 0, 0);
+    delay_us(shrDelay);
     for (i = 0; i < 64; i++) {
-        LCD_send_command(0x00, 1, 0);
+        LCD_putc(0x00);
     }
 }
 
 void LCD_init(void) {
-    //RS = 0;
     PORTK &= ~(1 << RS);
-    //RW = 0;
     PORTK &= ~(1 << RW);
-    delay_ms(20);
+    delay_ms(50);
     //Function set
     DB = 0b00111000;
     //E flik 1
-    //E = 1; delay_us(700);
-    PORTK |= 1 << E; delay_us(700);
-    //E = 0; delay_ms(1);
-    PORTK &= ~(1 << E); delay_ms(1);
-    delay_ms(5);
+    PORTK |= 1 << E; delay_us(etime);
+    PORTK &= ~(1 << E); delay_us(etime);
+    delay_us(shrDelay);
     //E flik 2
-    PORTK |= 1 << E; delay_us(700);
-    PORTK &= ~(1 << E); delay_ms(1);
-    delay_us(200);
-    //E flik 3
-    PORTK |= 1 << E; delay_us(700);
-    PORTK &= ~(1 << E); delay_ms(1);
-    //E flik 4
-    PORTK |= 1 << E; delay_us(700);
-    PORTK &= ~(1 << E); delay_ms(1);
+    PORTK |= 1 << E; delay_us(etime);
+    PORTK &= ~(1 << E); delay_us(etime);
+    delay_us(shrDelay);
     //setting parametrs 1
-    //LCD_off();
-    LCD_send_command(0b00001000, 0, 0);
+    LCD_off();
+    //LCD_send_command(0b00001000, 0, 0);
     //setting parametrs 2
-    //LCD_clr();
-    LCD_send_command(0b00000001, 0, 0);
+    LCD_clr();
+    //LCD_send_command(0b00000001, 0, 0);
     //setting parametrs 3
     //entry mode set
     LCD_send_command(0b00000110, 0, 0);
+    delay_us(shrDelay);
 }
 
 unsigned char GetData(unsigned char s,unsigned short l) {
