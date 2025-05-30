@@ -1,5 +1,5 @@
 
-AVRASM ver. 2.1.30  C:\Users\User\Desktop\bad_apple\st7066u 80seg test\Debug\List\prj10.asm Sat May 24 22:13:26 2025
+AVRASM ver. 2.1.30  C:\Users\User\Desktop\bad_apple\st7066u 80seg test\Debug\List\prj10.asm Fri May 30 07:54:40 2025
 
 C:\Users\User\Desktop\bad_apple\st7066u 80seg test\Debug\List\prj10.asm(1114): warning: Register r4 already defined by the .DEF directive
 C:\Users\User\Desktop\bad_apple\st7066u 80seg test\Debug\List\prj10.asm(1115): warning: Register r3 already defined by the .DEF directive
@@ -90354,45 +90354,45 @@ C:\Users\User\Desktop\bad_apple\st7066u 80seg test\Debug\List\prj10.asm(1120): w
 013510 93e0 00bc 	STS  188,R30
                  ; 0000 4188 
                  ; 0000 4189 LCD_init();
-013512 d173      	RCALL _LCD_init
+013512 d171      	RCALL _LCD_init
                  ; 0000 418A LCD_on();
-013513 d123      	RCALL _LCD_on
+013513 d121      	RCALL _LCD_on
                  ; 0000 418B LCD_CGRAM64_blank();
-013514 d162      	RCALL _LCD_CGRAM64_blank
+013514 d160      	RCALL _LCD_CGRAM64_blank
                  ; 0000 418C LCD_goto(0, 0);
 013515 e0e0      	LDI  R30,LOW(0)
 013516 93ea      	ST   -Y,R30
 013517 e0a0      	LDI  R26,LOW(0)
-013518 d122      	RCALL _LCD_goto
+013518 d120      	RCALL _LCD_goto
                  ; 0000 418D LCD_putc(0);
 013519 e0a0      	LDI  R26,LOW(0)
-01351a d141      	RCALL _LCD_putc
+01351a d13f      	RCALL _LCD_putc
                  ; 0000 418E LCD_putc(1);
 01351b e0a1      	LDI  R26,LOW(1)
-01351c d13f      	RCALL _LCD_putc
+01351c d13d      	RCALL _LCD_putc
                  ; 0000 418F LCD_putc(2);
 01351d e0a2      	LDI  R26,LOW(2)
-01351e d13d      	RCALL _LCD_putc
+01351e d13b      	RCALL _LCD_putc
                  ; 0000 4190 LCD_putc(3);
 01351f e0a3      	LDI  R26,LOW(3)
-013520 d13b      	RCALL _LCD_putc
+013520 d139      	RCALL _LCD_putc
                  ; 0000 4191 LCD_goto(0, 1);
 013521 e0e0      	LDI  R30,LOW(0)
 013522 93ea      	ST   -Y,R30
 013523 e0a1      	LDI  R26,LOW(1)
-013524 d116      	RCALL _LCD_goto
+013524 d114      	RCALL _LCD_goto
                  ; 0000 4192 LCD_putc(4);
 013525 e0a4      	LDI  R26,LOW(4)
-013526 d135      	RCALL _LCD_putc
+013526 d133      	RCALL _LCD_putc
                  ; 0000 4193 LCD_putc(5);
 013527 e0a5      	LDI  R26,LOW(5)
-013528 d133      	RCALL _LCD_putc
+013528 d131      	RCALL _LCD_putc
                  ; 0000 4194 LCD_putc(6);
 013529 e0a6      	LDI  R26,LOW(6)
-01352a d131      	RCALL _LCD_putc
+01352a d12f      	RCALL _LCD_putc
                  ; 0000 4195 LCD_putc(7);
 01352b e0a7      	LDI  R26,LOW(7)
-01352c d12f      	RCALL _LCD_putc
+01352c d12d      	RCALL _LCD_putc
                  ; 0000 4196 
                  ; 0000 4197 /*TCCR0A = (0 << COM0A1) | (0 << COM0A0) | (0 << COM0B1) | (0 << COM0B0) | (1 << ...
                  ; 0000 4198 TCCR0B = (0 << WGM02) | (0 << CS02) | (1 << CS01) | (1 << CS00);
@@ -90411,7 +90411,7 @@ C:\Users\User\Desktop\bad_apple\st7066u 80seg test\Debug\List\prj10.asm(1120): w
                  ; 0000 41A1 OCR1AH = 0x41;
 013533 e4e1      	LDI  R30,LOW(65)
 013534 93e0 0089 	STS  137,R30
-                 ; 0000 41A2 OCR1AL = 0x1A;//I will add stabilizer later for 16666 16666 16667 thing
+                 ; 0000 41A2 OCR1AL = 0x1A;//I added stabilizer for 16666 16666 16667 thing
 013536 e1ea      	LDI  R30,LOW(26)
 013537 93e0 0088 	STS  136,R30
                  ; 0000 41A3 
@@ -90425,7 +90425,7 @@ C:\Users\User\Desktop\bad_apple\st7066u 80seg test\Debug\List\prj10.asm(1120): w
                  _0x3:
                  ; 0000 41A8 {
                  ; 0000 41A9 // Place your code here
-                 ; 0000 41AA 
+                 ; 0000 41AA //code moved in tim1_coma
                  ; 0000 41AB /*if (framecount == 65535)fovf++;
                  ; 0000 41AC if ((framecount == 34463) && (fovf == 1)) {
                  ; 0000 41AD SREG &= ~(1 << 7);
@@ -90464,7 +90464,7 @@ C:\Users\User\Desktop\bad_apple\st7066u 80seg test\Debug\List\prj10.asm(1120): w
                  _0x6:
 01353e cfff      	RJMP _0x6
                  ; .FEND
-                 ;interrupt [18] void tim1_coma (void)
+                 ;interrupt[18] void tim1_coma(void)
                  ; 0000 41CF {
                  _tim1_coma:
                  ; .FSTART _tim1_coma
@@ -90513,10 +90513,10 @@ C:\Users\User\Desktop\bad_apple\st7066u 80seg test\Debug\List\prj10.asm(1120): w
                  ; 0000 41D5 case 0:symCodes[y * 32 + x * 8 + lines] = GetData(part, frame * 48 + y * 24 + li ...
 013561 9730      	SBIW R30,0
 013562 f459      	BRNE _0x13
-013563 d16f      	RCALL SUBOPT_0x0
+013563 d16d      	RCALL SUBOPT_0x0
 013564 93ff      	PUSH R31
 013565 93ef      	PUSH R30
-013566 d17e      	RCALL SUBOPT_0x1
+013566 d17c      	RCALL SUBOPT_0x1
 013567 95e6      	LSR  R30
 013568 95e6      	LSR  R30
 013569 95e6      	LSR  R30
@@ -90530,14 +90530,14 @@ C:\Users\User\Desktop\bad_apple\st7066u 80seg test\Debug\List\prj10.asm(1120): w
 01356f e0a0      	LDI  R26,HIGH(0x1)
 013570 07fa      	CPC  R31,R26
 013571 f491      	BRNE _0x14
-013572 d160      	RCALL SUBOPT_0x0
+013572 d15e      	RCALL SUBOPT_0x0
 013573 93ff      	PUSH R31
 013574 93ef      	PUSH R30
-013575 d16f      	RCALL SUBOPT_0x1
+013575 d16d      	RCALL SUBOPT_0x1
 013576 0fee      	LSL  R30
 013577 0fee      	LSL  R30
 013578 93ef      	PUSH R30
-013579 d181      	RCALL SUBOPT_0x2
+013579 d17f      	RCALL SUBOPT_0x2
 01357a 95e2      	SWAP R30
 01357b 70ef      	ANDI R30,0xF
 01357c 95e6      	LSR  R30
@@ -90554,10 +90554,10 @@ C:\Users\User\Desktop\bad_apple\st7066u 80seg test\Debug\List\prj10.asm(1120): w
 013585 e0a0      	LDI  R26,HIGH(0x2)
 013586 07fa      	CPC  R31,R26
 013587 f449      	BRNE _0x15
-013588 d14a      	RCALL SUBOPT_0x0
+013588 d148      	RCALL SUBOPT_0x0
 013589 93ff      	PUSH R31
 01358a 93ef      	PUSH R30
-01358b d16f      	RCALL SUBOPT_0x2
+01358b d16d      	RCALL SUBOPT_0x2
 01358c 95e6      	LSR  R30
 01358d 91af      	POP  R26
 01358e 91bf      	POP  R27
@@ -90569,10 +90569,10 @@ C:\Users\User\Desktop\bad_apple\st7066u 80seg test\Debug\List\prj10.asm(1120): w
 013592 e0a0      	LDI  R26,HIGH(0x3)
 013593 07fa      	CPC  R31,R26
 013594 f529      	BRNE _0x17
-013595 d13d      	RCALL SUBOPT_0x0
+013595 d13b      	RCALL SUBOPT_0x0
 013596 93ff      	PUSH R31
 013597 93ef      	PUSH R30
-013598 d162      	RCALL SUBOPT_0x2
+013598 d160      	RCALL SUBOPT_0x2
 013599 95e2      	SWAP R30
 01359a 7fe0      	ANDI R30,0xF0
 01359b 93ef      	PUSH R30
@@ -90583,7 +90583,7 @@ C:\Users\User\Desktop\bad_apple\st7066u 80seg test\Debug\List\prj10.asm(1120): w
                  	__GETW1R 9,10
 01359f e3a0      	LDI  R26,LOW(48)
 0135a0 e0b0      	LDI  R27,HIGH(48)
-0135a1 940f 373b 	CALL __MULW12U
+0135a1 940f 3739 	CALL __MULW12U
 0135a3 01bf      	MOVW R22,R30
 0135a4 2da3      	MOV  R26,R3
 0135a5 e1e8      	LDI  R30,LOW(24)
@@ -90601,7 +90601,7 @@ C:\Users\User\Desktop\bad_apple\st7066u 80seg test\Debug\List\prj10.asm(1120): w
 0135af 0fae      	ADD  R26,R30
 0135b0 1fbf      	ADC  R27,R31
 0135b1 9612      	ADIW R26,2
-0135b2 d0f2      	RCALL _GetData
+0135b2 d0f0      	RCALL _GetData
 0135b3 95e2      	SWAP R30
 0135b4 70ef      	ANDI R30,0xF
 0135b5 91af      	POP  R26
@@ -90631,7 +90631,7 @@ C:\Users\User\Desktop\bad_apple\st7066u 80seg test\Debug\List\prj10.asm(1120): w
                  ; 0000 41E1 LCD_CGRAM64(symCodes);
 0135c0 e0a0      	LDI  R26,LOW(_symCodes)
 0135c1 e0ba      	LDI  R27,HIGH(_symCodes)
-0135c2 d09f      	RCALL _LCD_CGRAM64
+0135c2 d09d      	RCALL _LCD_CGRAM64
                  ; 0000 41E2 frame++;
 0135c3 e0e1      	LDI  R30,LOW(1)
 0135c4 e0f0      	LDI  R31,HIGH(1)
@@ -90671,145 +90671,143 @@ C:\Users\User\Desktop\bad_apple\st7066u 80seg test\Debug\List\prj10.asm(1120): w
                  ; 0000 41EA part++;
 0135da 9443      	INC  R4
                  ; 0000 41EB }
-                 ; 0000 41EC stb++;
-                 _0x1B:
-0135db 9483      	INC  R8
+                 ; 0000 41EC //stabilizator
                  ; 0000 41ED switch (stb) {
-0135dc 2de8      	MOV  R30,R8
-0135dd e0f0      	LDI  R31,0
-                 ; 0000 41EE case 0:OCR1AL -= 1; break;
-0135de 9730      	SBIW R30,0
-0135df f431      	BRNE _0x1F
-0135e0 e8a8      	LDI  R26,LOW(136)
-0135e1 e0b0      	LDI  R27,HIGH(136)
-0135e2 91ec      	LD   R30,X
-0135e3 50e1      	SUBI R30,LOW(1)
-0135e4 93ec      	ST   X,R30
-0135e5 c019      	RJMP _0x1E
-                 ; 0000 41EF case 1:break;
-                 _0x1F:
-0135e6 30e1      	CPI  R30,LOW(0x1)
-0135e7 e0a0      	LDI  R26,HIGH(0x1)
-0135e8 07fa      	CPC  R31,R26
-0135e9 f0a9      	BREQ _0x1E
-                 ; 0000 41F0 case 2:OCR1AL += 1; break;
-0135ea 30e2      	CPI  R30,LOW(0x2)
-0135eb e0a0      	LDI  R26,HIGH(0x2)
-0135ec 07fa      	CPC  R31,R26
-0135ed f431      	BRNE _0x21
-0135ee e8a8      	LDI  R26,LOW(136)
-0135ef e0b0      	LDI  R27,HIGH(136)
-0135f0 91ec      	LD   R30,X
-0135f1 5fef      	SUBI R30,-LOW(1)
-0135f2 93ec      	ST   X,R30
-0135f3 c00b      	RJMP _0x1E
-                 ; 0000 41F1 case 3:stb = 0; break;
-                 _0x21:
-0135f4 30e3      	CPI  R30,LOW(0x3)
-0135f5 e0a0      	LDI  R26,HIGH(0x3)
-0135f6 07fa      	CPC  R31,R26
-0135f7 f411      	BRNE _0x23
-0135f8 2488      	CLR  R8
-0135f9 c005      	RJMP _0x1E
-                 ; 0000 41F2 default:TIMSK1 &= ~(1 << OCIE1A);
-                 _0x23:
-0135fa 91e0 006f 	LDS  R30,111
-0135fc 7fed      	ANDI R30,0xFD
-0135fd 93e0 006f 	STS  111,R30
-                 ; 0000 41F3 }
+                 _0x1B:
+0135db 2de8      	MOV  R30,R8
+0135dc e0f0      	LDI  R31,0
+                 ; 0000 41EE case 0: break;                   //16666 0
+0135dd 9730      	SBIW R30,0
+0135de f0c9      	BREQ _0x1E
+                 ; 0000 41EF case 1: OCR1AL += 1; break;      //16666 +1
+0135df 30e1      	CPI  R30,LOW(0x1)
+0135e0 e0a0      	LDI  R26,HIGH(0x1)
+0135e1 07fa      	CPC  R31,R26
+0135e2 f431      	BRNE _0x20
+0135e3 e8a8      	LDI  R26,LOW(136)
+0135e4 e0b0      	LDI  R27,HIGH(136)
+0135e5 91ec      	LD   R30,X
+0135e6 5fef      	SUBI R30,-LOW(1)
+0135e7 93ec      	ST   X,R30
+0135e8 c00f      	RJMP _0x1E
+                 ; 0000 41F0 case 2: OCR1AL -= 1; break;      //16667 -1
+                 _0x20:
+0135e9 30e2      	CPI  R30,LOW(0x2)
+0135ea e0a0      	LDI  R26,HIGH(0x2)
+0135eb 07fa      	CPC  R31,R26
+0135ec f431      	BRNE _0x22
+0135ed e8a8      	LDI  R26,LOW(136)
+0135ee e0b0      	LDI  R27,HIGH(136)
+0135ef 91ec      	LD   R30,X
+0135f0 50e1      	SUBI R30,LOW(1)
+0135f1 93ec      	ST   X,R30
+0135f2 c005      	RJMP _0x1E
+                 ; 0000 41F1 default:TIMSK1 &= ~(1 << OCIE1A);
+                 _0x22:
+0135f3 91e0 006f 	LDS  R30,111
+0135f5 7fed      	ANDI R30,0xFD
+0135f6 93e0 006f 	STS  111,R30
+                 ; 0000 41F2 }
                  _0x1E:
+                 ; 0000 41F3 if (++stb > 2)stb = 0;
+0135f8 9483      	INC  R8
+0135f9 e0e2      	LDI  R30,LOW(2)
+0135fa 15e8      	CP   R30,R8
+0135fb f408      	BRSH _0x23
+0135fc 2488      	CLR  R8
                  ; 0000 41F4 }
+                 _0x23:
+0135fd 91e9      	LD   R30,Y+
+0135fe bfef      	OUT  SREG,R30
 0135ff 91e9      	LD   R30,Y+
-013600 bfef      	OUT  SREG,R30
+013600 bfec      	OUT  EIND,R30
 013601 91e9      	LD   R30,Y+
-013602 bfec      	OUT  EIND,R30
-013603 91e9      	LD   R30,Y+
-013604 bfeb      	OUT  RAMPZ,R30
-013605 91f9      	LD   R31,Y+
-013606 91e9      	LD   R30,Y+
-013607 91b9      	LD   R27,Y+
-013608 91a9      	LD   R26,Y+
-013609 9199      	LD   R25,Y+
-01360a 9189      	LD   R24,Y+
-01360b 9179      	LD   R23,Y+
-01360c 9169      	LD   R22,Y+
-01360d 90f9      	LD   R15,Y+
-01360e 9019      	LD   R1,Y+
-01360f 9009      	LD   R0,Y+
-013610 9518      	RETI
+013602 bfeb      	OUT  RAMPZ,R30
+013603 91f9      	LD   R31,Y+
+013604 91e9      	LD   R30,Y+
+013605 91b9      	LD   R27,Y+
+013606 91a9      	LD   R26,Y+
+013607 9199      	LD   R25,Y+
+013608 9189      	LD   R24,Y+
+013609 9179      	LD   R23,Y+
+01360a 9169      	LD   R22,Y+
+01360b 90f9      	LD   R15,Y+
+01360c 9019      	LD   R1,Y+
+01360d 9009      	LD   R0,Y+
+01360e 9518      	RETI
                  ; .FEND
                  ;void LCD_send_command(unsigned char dat, unsigned char rs, unsigned char rw) {
                  ; 0000 41FC void LCD_send_command(unsigned char dat, unsigned char rs, unsigned char rw) {
                  _LCD_send_command:
                  ; .FSTART _LCD_send_command
                  ; 0000 41FD if (rs == 1) PORTK |= 1 << RS;
-013611 d11f      	RCALL __SAVELOCR4
-013612 2f1a      	MOV  R17,R26
-013613 810c      	LDD  R16,Y+4
-013614 813d      	LDD  R19,Y+5
+01360f d11f      	RCALL __SAVELOCR4
+013610 2f1a      	MOV  R17,R26
+013611 810c      	LDD  R16,Y+4
+013612 813d      	LDD  R19,Y+5
                  ;	dat -> R19
                  ;	rs -> R16
                  ;	rw -> R17
-013615 3001      	CPI  R16,1
-013616 f421      	BRNE _0x24
-013617 91e0 0108 	LDS  R30,264
-013619 60e4      	ORI  R30,4
-01361a c003      	RJMP _0x42
+013613 3001      	CPI  R16,1
+013614 f421      	BRNE _0x24
+013615 91e0 0108 	LDS  R30,264
+013617 60e4      	ORI  R30,4
+013618 c003      	RJMP _0x42
                  ; 0000 41FE else PORTK &= ~(1 << RS);
                  _0x24:
-01361b 91e0 0108 	LDS  R30,264
-01361d 7feb      	ANDI R30,0xFB
+013619 91e0 0108 	LDS  R30,264
+01361b 7feb      	ANDI R30,0xFB
                  _0x42:
-01361e 93e0 0108 	STS  264,R30
+01361c 93e0 0108 	STS  264,R30
                  ; 0000 41FF 
                  ; 0000 4200 if (rw == 1) PORTK |= 1 << RW;
-013620 3011      	CPI  R17,1
-013621 f421      	BRNE _0x26
-013622 91e0 0108 	LDS  R30,264
-013624 60e2      	ORI  R30,2
-013625 c003      	RJMP _0x43
+01361e 3011      	CPI  R17,1
+01361f f421      	BRNE _0x26
+013620 91e0 0108 	LDS  R30,264
+013622 60e2      	ORI  R30,2
+013623 c003      	RJMP _0x43
                  ; 0000 4201 else PORTK &= ~(1 << RW);
                  _0x26:
-013626 91e0 0108 	LDS  R30,264
-013628 7fed      	ANDI R30,0xFD
+013624 91e0 0108 	LDS  R30,264
+013626 7fed      	ANDI R30,0xFD
                  _0x43:
-013629 93e0 0108 	STS  264,R30
+013627 93e0 0108 	STS  264,R30
                  ; 0000 4202 DB = dat;
-01362b bb31      	OUT  0x11,R19
+013629 bb31      	OUT  0x11,R19
                  ; 0000 4203 
                  ; 0000 4204 PORTK |= 1 << E; delay_us(etime);
-01362c d0e5      	RCALL SUBOPT_0x3
+01362a d0e5      	RCALL SUBOPT_0x3
                  ; 0000 4205 PORTK &= ~(1 << E); delay_us(etime);
                  ; 0000 4206 }
-01362d d108      	RCALL __LOADLOCR4
-01362e 9626      	ADIW R28,6
-01362f 9508      	RET
+01362b d108      	RCALL __LOADLOCR4
+01362c 9626      	ADIW R28,6
+01362d 9508      	RET
                  ; .FEND
                  ;void LCD_clr(void) {
                  ; 0000 4208 void LCD_clr(void) {
                  _LCD_clr:
                  ; .FSTART _LCD_clr
                  ; 0000 4209 LCD_send_command(0b00000001, 0, 0);
-013630 e0e1      	LDI  R30,LOW(1)
-013631 d0f3      	RCALL SUBOPT_0x4
+01362e e0e1      	LDI  R30,LOW(1)
+01362f d0f3      	RCALL SUBOPT_0x4
                  ; 0000 420A delay_us(1520);
                 +
-013632 ec80     +LDI R24 , LOW ( 6080 )
-013633 e197     +LDI R25 , HIGH ( 6080 )
+013630 ec80     +LDI R24 , LOW ( 6080 )
+013631 e197     +LDI R25 , HIGH ( 6080 )
                 +__DELAY_USW_LOOP :
-013634 9701     +SBIW R24 , 1
-013635 f7f1     +BRNE __DELAY_USW_LOOP
+013632 9701     +SBIW R24 , 1
+013633 f7f1     +BRNE __DELAY_USW_LOOP
                  	__DELAY_USW 6080
                  ; 0000 420B }
-013636 9508      	RET
+013634 9508      	RET
                  ; .FEND
                  ;void LCD_on(void) {
                  ; 0000 420D void LCD_on(void) {
                  _LCD_on:
                  ; .FSTART _LCD_on
                  ; 0000 420E LCD_send_command(0b00001100, 0, 0);
-013637 e0ec      	LDI  R30,LOW(12)
-013638 c068      	RJMP _0x2000002
+013635 e0ec      	LDI  R30,LOW(12)
+013636 c068      	RJMP _0x2000002
                  ; 0000 420F delay_us(shrDelay);
                  ; 0000 4210 }
                  ; .FEND
@@ -90818,8 +90816,8 @@ C:\Users\User\Desktop\bad_apple\st7066u 80seg test\Debug\List\prj10.asm(1120): w
                  _LCD_off:
                  ; .FSTART _LCD_off
                  ; 0000 4213 LCD_send_command(0b00001000, 0, 0);
-013639 e0e8      	LDI  R30,LOW(8)
-01363a c066      	RJMP _0x2000002
+013637 e0e8      	LDI  R30,LOW(8)
+013638 c066      	RJMP _0x2000002
                  ; 0000 4214 delay_us(shrDelay);
                  ; 0000 4215 }
                  ; .FEND
@@ -90828,72 +90826,72 @@ C:\Users\User\Desktop\bad_apple\st7066u 80seg test\Debug\List\prj10.asm(1120): w
                  _LCD_goto:
                  ; .FSTART _LCD_goto
                  ; 0000 4218 switch (y)
-01363b 931a      	ST   -Y,R17
-01363c 930a      	ST   -Y,R16
-01363d 2f1a      	MOV  R17,R26
-01363e 810a      	LDD  R16,Y+2
+013639 931a      	ST   -Y,R17
+01363a 930a      	ST   -Y,R16
+01363b 2f1a      	MOV  R17,R26
+01363c 810a      	LDD  R16,Y+2
                  ;	x -> R16
                  ;	y -> R17
-01363f 2fe1      	MOV  R30,R17
-013640 e0f0      	LDI  R31,0
+01363d 2fe1      	MOV  R30,R17
+01363e e0f0      	LDI  R31,0
                  ; 0000 4219 {
                  ; 0000 421A case 1:x += 40; break;
-013641 30e1      	CPI  R30,LOW(0x1)
-013642 e0a0      	LDI  R26,HIGH(0x1)
-013643 07fa      	CPC  R31,R26
-013644 f411      	BRNE _0x2B
-013645 5d08      	SUBI R16,-LOW(40)
-013646 c00b      	RJMP _0x2A
+01363f 30e1      	CPI  R30,LOW(0x1)
+013640 e0a0      	LDI  R26,HIGH(0x1)
+013641 07fa      	CPC  R31,R26
+013642 f411      	BRNE _0x2B
+013643 5d08      	SUBI R16,-LOW(40)
+013644 c00b      	RJMP _0x2A
                  ; 0000 421B case 2:x += 20; break;
                  _0x2B:
-013647 30e2      	CPI  R30,LOW(0x2)
-013648 e0a0      	LDI  R26,HIGH(0x2)
-013649 07fa      	CPC  R31,R26
-01364a f411      	BRNE _0x2C
-01364b 5e0c      	SUBI R16,-LOW(20)
-01364c c005      	RJMP _0x2A
+013645 30e2      	CPI  R30,LOW(0x2)
+013646 e0a0      	LDI  R26,HIGH(0x2)
+013647 07fa      	CPC  R31,R26
+013648 f411      	BRNE _0x2C
+013649 5e0c      	SUBI R16,-LOW(20)
+01364a c005      	RJMP _0x2A
                  ; 0000 421C case 3:x += 84; break;
                  _0x2C:
-01364d 30e3      	CPI  R30,LOW(0x3)
-01364e e0a0      	LDI  R26,HIGH(0x3)
-01364f 07fa      	CPC  R31,R26
-013650 f409      	BRNE _0x2E
-013651 5a0c      	SUBI R16,-LOW(84)
+01364b 30e3      	CPI  R30,LOW(0x3)
+01364c e0a0      	LDI  R26,HIGH(0x3)
+01364d 07fa      	CPC  R31,R26
+01364e f409      	BRNE _0x2E
+01364f 5a0c      	SUBI R16,-LOW(84)
                  ; 0000 421D default:break;
                  _0x2E:
                  ; 0000 421E }
                  _0x2A:
                  ; 0000 421F LCD_send_command(x | (1 << 7), 0, 0);
-013652 2fe0      	MOV  R30,R16
-013653 68e0      	ORI  R30,0x80
-013654 d0d0      	RCALL SUBOPT_0x4
+013650 2fe0      	MOV  R30,R16
+013651 68e0      	ORI  R30,0x80
+013652 d0d0      	RCALL SUBOPT_0x4
                  ; 0000 4220 delay_us(shrDelay);
                 +
-013655 ec85     +LDI R24 , LOW ( 197 )
+013653 ec85     +LDI R24 , LOW ( 197 )
                 +__DELAY_USB_LOOP :
-013656 958a     +DEC R24
-013657 f7f1     +BRNE __DELAY_USB_LOOP
+013654 958a     +DEC R24
+013655 f7f1     +BRNE __DELAY_USB_LOOP
                  	__DELAY_USB 197
                  ; 0000 4221 }
-013658 8119      	LDD  R17,Y+1
-013659 8108      	LDD  R16,Y+0
-01365a 9623      	ADIW R28,3
-01365b 9508      	RET
+013656 8119      	LDD  R17,Y+1
+013657 8108      	LDD  R16,Y+0
+013658 9623      	ADIW R28,3
+013659 9508      	RET
                  ; .FEND
                  ;void LCD_putc(unsigned char c) {
                  ; 0000 4223 void LCD_putc(unsigned char c) {
                  _LCD_putc:
                  ; .FSTART _LCD_putc
                  ; 0000 4224 LCD_send_command(c, 1, 0);
-01365c 931a      	ST   -Y,R17
-01365d 2f1a      	MOV  R17,R26
+01365a 931a      	ST   -Y,R17
+01365b 2f1a      	MOV  R17,R26
                  ;	c -> R17
-01365e 931a      	ST   -Y,R17
-01365f e0e1      	LDI  R30,LOW(1)
-013660 d0c9      	RCALL SUBOPT_0x5
+01365c 931a      	ST   -Y,R17
+01365d e0e1      	LDI  R30,LOW(1)
+01365e d0c9      	RCALL SUBOPT_0x5
                  ; 0000 4225 delay_us(shrDelay);
                  ; 0000 4226 }
-013661 c022      	RJMP _0x2000003
+01365f c022      	RJMP _0x2000003
                  ; .FEND
                  ;void LCD_puts(unsigned char* s) {
                  ; 0000 4228 void LCD_puts(unsigned char* s) {
@@ -90920,39 +90918,39 @@ C:\Users\User\Desktop\bad_apple\st7066u 80seg test\Debug\List\prj10.asm(1120): w
                  ; .FSTART _LCD_CGRAM64
                  ; 0000 4238 char i;
                  ; 0000 4239 LCD_send_command(1 << 6, 0, 0);
-013662 d0ce      	RCALL __SAVELOCR4
-013663 019d      	MOVW R18,R26
+013660 d0ce      	RCALL __SAVELOCR4
+013661 019d      	MOVW R18,R26
                  ;	sym -> R18,R19
                  ;	i -> R17
-013664 e4e0      	LDI  R30,LOW(64)
-013665 d0bf      	RCALL SUBOPT_0x4
+013662 e4e0      	LDI  R30,LOW(64)
+013663 d0bf      	RCALL SUBOPT_0x4
                  ; 0000 423A delay_us(shrDelay);
                 +
-013666 ec85     +LDI R24 , LOW ( 197 )
+013664 ec85     +LDI R24 , LOW ( 197 )
                 +__DELAY_USB_LOOP :
-013667 958a     +DEC R24
-013668 f7f1     +BRNE __DELAY_USB_LOOP
+013665 958a     +DEC R24
+013666 f7f1     +BRNE __DELAY_USB_LOOP
                  	__DELAY_USB 197
                  ; 0000 423B for (i = 0; i < 64; i++) {
-013669 e010      	LDI  R17,LOW(0)
+013667 e010      	LDI  R17,LOW(0)
                  _0x36:
-01366a 3410      	CPI  R17,64
-01366b f440      	BRSH _0x37
+013668 3410      	CPI  R17,64
+013669 f440      	BRSH _0x37
                  ; 0000 423C LCD_putc(sym[i]);
-01366c 01d9      	MOVW R26,R18
-01366d 27ee      	CLR  R30
-01366e 0fa1      	ADD  R26,R17
-01366f 1fbe      	ADC  R27,R30
-013670 91ac      	LD   R26,X
-013671 dfea      	RCALL _LCD_putc
+01366a 01d9      	MOVW R26,R18
+01366b 27ee      	CLR  R30
+01366c 0fa1      	ADD  R26,R17
+01366d 1fbe      	ADC  R27,R30
+01366e 91ac      	LD   R26,X
+01366f dfea      	RCALL _LCD_putc
                  ; 0000 423D }
-013672 5f1f      	SUBI R17,-1
-013673 cff6      	RJMP _0x36
+013670 5f1f      	SUBI R17,-1
+013671 cff6      	RJMP _0x36
                  _0x37:
                  ; 0000 423E }
-013674 d0c1      	RCALL __LOADLOCR4
-013675 9624      	ADIW R28,4
-013676 9508      	RET
+013672 d0c1      	RCALL __LOADLOCR4
+013673 9624      	ADIW R28,4
+013674 9508      	RET
                  ; .FEND
                  ;void LCD_CGRAM64_blank(void) {
                  ; 0000 4240 void LCD_CGRAM64_blank(void) {
@@ -90960,166 +90958,166 @@ C:\Users\User\Desktop\bad_apple\st7066u 80seg test\Debug\List\prj10.asm(1120): w
                  ; .FSTART _LCD_CGRAM64_blank
                  ; 0000 4241 char i;
                  ; 0000 4242 LCD_send_command(1 << 6, 0, 0);
-013677 931a      	ST   -Y,R17
+013675 931a      	ST   -Y,R17
                  ;	i -> R17
-013678 e4e0      	LDI  R30,LOW(64)
-013679 d0ab      	RCALL SUBOPT_0x4
+013676 e4e0      	LDI  R30,LOW(64)
+013677 d0ab      	RCALL SUBOPT_0x4
                  ; 0000 4243 delay_us(shrDelay);
                 +
-01367a ec85     +LDI R24 , LOW ( 197 )
+013678 ec85     +LDI R24 , LOW ( 197 )
                 +__DELAY_USB_LOOP :
-01367b 958a     +DEC R24
-01367c f7f1     +BRNE __DELAY_USB_LOOP
+013679 958a     +DEC R24
+01367a f7f1     +BRNE __DELAY_USB_LOOP
                  	__DELAY_USB 197
                  ; 0000 4244 for (i = 0; i < 64; i++) {
-01367d e010      	LDI  R17,LOW(0)
+01367b e010      	LDI  R17,LOW(0)
                  _0x39:
-01367e 3410      	CPI  R17,64
-01367f f420      	BRSH _0x3A
+01367c 3410      	CPI  R17,64
+01367d f420      	BRSH _0x3A
                  ; 0000 4245 LCD_putc(0x00);
-013680 e0a0      	LDI  R26,LOW(0)
-013681 dfda      	RCALL _LCD_putc
+01367e e0a0      	LDI  R26,LOW(0)
+01367f dfda      	RCALL _LCD_putc
                  ; 0000 4246 }
-013682 5f1f      	SUBI R17,-1
-013683 cffa      	RJMP _0x39
+013680 5f1f      	SUBI R17,-1
+013681 cffa      	RJMP _0x39
                  _0x3A:
                  ; 0000 4247 }
                  _0x2000003:
-013684 9119      	LD   R17,Y+
-013685 9508      	RET
+013682 9119      	LD   R17,Y+
+013683 9508      	RET
                  ; .FEND
                  ;void LCD_init(void) {
                  ; 0000 4249 void LCD_init(void) {
                  _LCD_init:
                  ; .FSTART _LCD_init
                  ; 0000 424A PORTK &= ~(1 << RS);
-013686 91e0 0108 	LDS  R30,264
-013688 7feb      	ANDI R30,0xFB
-013689 93e0 0108 	STS  264,R30
+013684 91e0 0108 	LDS  R30,264
+013686 7feb      	ANDI R30,0xFB
+013687 93e0 0108 	STS  264,R30
                  ; 0000 424B PORTK &= ~(1 << RW);
-01368b 91e0 0108 	LDS  R30,264
-01368d 7fed      	ANDI R30,0xFD
-01368e 93e0 0108 	STS  264,R30
+013689 91e0 0108 	LDS  R30,264
+01368b 7fed      	ANDI R30,0xFD
+01368c 93e0 0108 	STS  264,R30
                  ; 0000 424C delay_ms(50);
-013690 e3a2      	LDI  R26,LOW(50)
-013691 e0b0      	LDI  R27,0
-013692 940f 3743 	CALL _delay_ms
+01368e e3a2      	LDI  R26,LOW(50)
+01368f e0b0      	LDI  R27,0
+013690 940f 3741 	CALL _delay_ms
                  ; 0000 424D //Function set
                  ; 0000 424E DB = 0b00111000;
-013694 e3e8      	LDI  R30,LOW(56)
-013695 bbe1      	OUT  0x11,R30
+013692 e3e8      	LDI  R30,LOW(56)
+013693 bbe1      	OUT  0x11,R30
                  ; 0000 424F //E flik 1
                  ; 0000 4250 PORTK |= 1 << E; delay_us(etime);
-013696 d07b      	RCALL SUBOPT_0x3
+013694 d07b      	RCALL SUBOPT_0x3
                  ; 0000 4251 PORTK &= ~(1 << E); delay_us(etime);
                  ; 0000 4252 delay_us(shrDelay);
                 +
-013697 ec85     +LDI R24 , LOW ( 197 )
+013695 ec85     +LDI R24 , LOW ( 197 )
                 +__DELAY_USB_LOOP :
-013698 958a     +DEC R24
-013699 f7f1     +BRNE __DELAY_USB_LOOP
+013696 958a     +DEC R24
+013697 f7f1     +BRNE __DELAY_USB_LOOP
                  	__DELAY_USB 197
                  ; 0000 4253 //E flik 2
                  ; 0000 4254 PORTK |= 1 << E; delay_us(etime);
-01369a d077      	RCALL SUBOPT_0x3
+013698 d077      	RCALL SUBOPT_0x3
                  ; 0000 4255 PORTK &= ~(1 << E); delay_us(etime);
                  ; 0000 4256 delay_us(shrDelay);
                 +
-01369b ec85     +LDI R24 , LOW ( 197 )
+013699 ec85     +LDI R24 , LOW ( 197 )
                 +__DELAY_USB_LOOP :
-01369c 958a     +DEC R24
-01369d f7f1     +BRNE __DELAY_USB_LOOP
+01369a 958a     +DEC R24
+01369b f7f1     +BRNE __DELAY_USB_LOOP
                  	__DELAY_USB 197
                  ; 0000 4257 //setting parametrs 1
                  ; 0000 4258 LCD_off();
-01369e df9a      	RCALL _LCD_off
+01369c df9a      	RCALL _LCD_off
                  ; 0000 4259 //LCD_send_command(0b00001000, 0, 0);
                  ; 0000 425A //setting parametrs 2
                  ; 0000 425B LCD_clr();
-01369f df90      	RCALL _LCD_clr
+01369d df90      	RCALL _LCD_clr
                  ; 0000 425C //LCD_send_command(0b00000001, 0, 0);
                  ; 0000 425D //setting parametrs 3
                  ; 0000 425E //entry mode set
                  ; 0000 425F LCD_send_command(0b00000110, 0, 0);
-0136a0 e0e6      	LDI  R30,LOW(6)
+01369e e0e6      	LDI  R30,LOW(6)
                  _0x2000002:
-0136a1 93ea      	ST   -Y,R30
-0136a2 e0e0      	LDI  R30,LOW(0)
-0136a3 d086      	RCALL SUBOPT_0x5
+01369f 93ea      	ST   -Y,R30
+0136a0 e0e0      	LDI  R30,LOW(0)
+0136a1 d086      	RCALL SUBOPT_0x5
                  ; 0000 4260 delay_us(shrDelay);
                  ; 0000 4261 }
-0136a4 9508      	RET
+0136a2 9508      	RET
                  ; .FEND
-                 ;unsigned char GetData(unsigned char s,unsigned short l) {
-                 ; 0000 4263 unsigned char GetData(unsigned char s,unsigned short l) {
+                 ;unsigned char GetData(unsigned char s, unsigned short l) {
+                 ; 0000 4263 unsigned char GetData(unsigned char s, unsigned short l) {
                  _GetData:
                  ; .FSTART _GetData
                  ; 0000 4264 switch (s)
-0136a5 d08b      	RCALL __SAVELOCR4
-0136a6 018d      	MOVW R16,R26
-0136a7 813c      	LDD  R19,Y+4
+0136a3 d08b      	RCALL __SAVELOCR4
+0136a4 018d      	MOVW R16,R26
+0136a5 813c      	LDD  R19,Y+4
                  ;	s -> R19
                  ;	l -> R16,R17
-0136a8 2fe3      	MOV  R30,R19
-0136a9 e0f0      	LDI  R31,0
+0136a6 2fe3      	MOV  R30,R19
+0136a7 e0f0      	LDI  R31,0
                  ; 0000 4265 {
                  ; 0000 4266 case 0:return arr1[l];
-0136aa 9730      	SBIW R30,0
-0136ab f449      	BRNE _0x3E
-0136ac 01f8      	MOVW R30,R16
-0136ad 2766      	CLR  R22
-0136ae 2777      	CLR  R23
-0136af 51ec      	SUBI R30,LOW(-_arr1*2)
-0136b0 4fff      	SBCI R31,HIGH(-_arr1*2)
-0136b1 4f6f      	SBCI R22,BYTE3(-_arr1*2)
+0136a8 9730      	SBIW R30,0
+0136a9 f449      	BRNE _0x3E
+0136aa 01f8      	MOVW R30,R16
+0136ab 2766      	CLR  R22
+0136ac 2777      	CLR  R23
+0136ad 51ec      	SUBI R30,LOW(-_arr1*2)
+0136ae 4fff      	SBCI R31,HIGH(-_arr1*2)
+0136af 4f6f      	SBCI R22,BYTE3(-_arr1*2)
                 +
-0136b2 bf6b     +OUT RAMPZ , R22
-0136b3 91e6     +ELPM R30 , Z
+0136b0 bf6b     +OUT RAMPZ , R22
+0136b1 91e6     +ELPM R30 , Z
                  	__GETBRPF 30
-0136b4 c01b      	RJMP _0x2000001
+0136b2 c01b      	RJMP _0x2000001
                  ; 0000 4267 case 1:return arr2[l];
                  _0x3E:
-0136b5 30e1      	CPI  R30,LOW(0x1)
-0136b6 e0a0      	LDI  R26,HIGH(0x1)
-0136b7 07fa      	CPC  R31,R26
-0136b8 f449      	BRNE _0x3F
-0136b9 01f8      	MOVW R30,R16
-0136ba 2766      	CLR  R22
-0136bb 2777      	CLR  R23
-0136bc 52ec      	SUBI R30,LOW(-_arr2*2)
-0136bd 4fff      	SBCI R31,HIGH(-_arr2*2)
-0136be 4f6e      	SBCI R22,BYTE3(-_arr2*2)
+0136b3 30e1      	CPI  R30,LOW(0x1)
+0136b4 e0a0      	LDI  R26,HIGH(0x1)
+0136b5 07fa      	CPC  R31,R26
+0136b6 f449      	BRNE _0x3F
+0136b7 01f8      	MOVW R30,R16
+0136b8 2766      	CLR  R22
+0136b9 2777      	CLR  R23
+0136ba 52ec      	SUBI R30,LOW(-_arr2*2)
+0136bb 4fff      	SBCI R31,HIGH(-_arr2*2)
+0136bc 4f6e      	SBCI R22,BYTE3(-_arr2*2)
                 +
-0136bf bf6b     +OUT RAMPZ , R22
-0136c0 91e6     +ELPM R30 , Z
+0136bd bf6b     +OUT RAMPZ , R22
+0136be 91e6     +ELPM R30 , Z
                  	__GETBRPF 30
-0136c1 c00e      	RJMP _0x2000001
+0136bf c00e      	RJMP _0x2000001
                  ; 0000 4268 case 2:return arr3[l];
                  _0x3F:
-0136c2 30e2      	CPI  R30,LOW(0x2)
-0136c3 e0a0      	LDI  R26,HIGH(0x2)
-0136c4 07fa      	CPC  R31,R26
-0136c5 f449      	BRNE _0x41
-0136c6 01f8      	MOVW R30,R16
-0136c7 2766      	CLR  R22
-0136c8 2777      	CLR  R23
-0136c9 53ec      	SUBI R30,LOW(-_arr3*2)
-0136ca 4fff      	SBCI R31,HIGH(-_arr3*2)
-0136cb 4f6d      	SBCI R22,BYTE3(-_arr3*2)
+0136c0 30e2      	CPI  R30,LOW(0x2)
+0136c1 e0a0      	LDI  R26,HIGH(0x2)
+0136c2 07fa      	CPC  R31,R26
+0136c3 f449      	BRNE _0x41
+0136c4 01f8      	MOVW R30,R16
+0136c5 2766      	CLR  R22
+0136c6 2777      	CLR  R23
+0136c7 53ec      	SUBI R30,LOW(-_arr3*2)
+0136c8 4fff      	SBCI R31,HIGH(-_arr3*2)
+0136c9 4f6d      	SBCI R22,BYTE3(-_arr3*2)
                 +
-0136cc bf6b     +OUT RAMPZ , R22
-0136cd 91e6     +ELPM R30 , Z
+0136ca bf6b     +OUT RAMPZ , R22
+0136cb 91e6     +ELPM R30 , Z
                  	__GETBRPF 30
-0136ce c001      	RJMP _0x2000001
+0136cc c001      	RJMP _0x2000001
                  ; 0000 4269 default:return 0;
                  _0x41:
-0136cf e0e0      	LDI  R30,LOW(0)
+0136cd e0e0      	LDI  R30,LOW(0)
                  ; 0000 426A }
                  ; 0000 426B }
                  _0x2000001:
-0136d0 d065      	RCALL __LOADLOCR4
-0136d1 9625      	ADIW R28,5
-0136d2 9508      	RET
+0136ce d065      	RCALL __LOADLOCR4
+0136cf 9625      	ADIW R28,5
+0136d0 9508      	RET
                  ; .FEND
                  
                  	.DSEG
@@ -91129,174 +91127,174 @@ C:\Users\User\Desktop\bad_apple\st7066u 80seg test\Debug\List\prj10.asm(1120): w
                  	.CSEG
                  ;OPTIMIZER ADDED SUBROUTINE, CALLED 4 TIMES, CODE SIZE REDUCTION:42 WORDS
                  SUBOPT_0x0:
-0136d3 2da3      	MOV  R26,R3
-0136d4 e2e0      	LDI  R30,LOW(32)
-0136d5 9fea      	MUL  R30,R26
-0136d6 01b0      	MOVW R22,R0
-0136d7 2da6      	MOV  R26,R6
-0136d8 e0e8      	LDI  R30,LOW(8)
-0136d9 9fea      	MUL  R30,R26
-0136da 01f0      	MOVW R30,R0
-0136db 01db      	MOVW R26,R22
-0136dc 0fae      	ADD  R26,R30
-0136dd 1fbf      	ADC  R27,R31
-0136de 2de5      	MOV  R30,R5
-0136df e0f0      	LDI  R31,0
-0136e0 0fea      	ADD  R30,R26
-0136e1 1ffb      	ADC  R31,R27
-0136e2 50e0      	SUBI R30,LOW(-_symCodes)
-0136e3 4ff6      	SBCI R31,HIGH(-_symCodes)
-0136e4 9508      	RET
+0136d1 2da3      	MOV  R26,R3
+0136d2 e2e0      	LDI  R30,LOW(32)
+0136d3 9fea      	MUL  R30,R26
+0136d4 01b0      	MOVW R22,R0
+0136d5 2da6      	MOV  R26,R6
+0136d6 e0e8      	LDI  R30,LOW(8)
+0136d7 9fea      	MUL  R30,R26
+0136d8 01f0      	MOVW R30,R0
+0136d9 01db      	MOVW R26,R22
+0136da 0fae      	ADD  R26,R30
+0136db 1fbf      	ADC  R27,R31
+0136dc 2de5      	MOV  R30,R5
+0136dd e0f0      	LDI  R31,0
+0136de 0fea      	ADD  R30,R26
+0136df 1ffb      	ADC  R31,R27
+0136e0 50e0      	SUBI R30,LOW(-_symCodes)
+0136e1 4ff6      	SBCI R31,HIGH(-_symCodes)
+0136e2 9508      	RET
                  
                  ;OPTIMIZER ADDED SUBROUTINE, CALLED 2 TIMES, CODE SIZE REDUCTION:18 WORDS
                  SUBOPT_0x1:
-0136e5 924a      	ST   -Y,R4
+0136e3 924a      	ST   -Y,R4
                 +
-0136e6 2de9     +MOV R30 , R9
-0136e7 2dfa     +MOV R31 , R10
+0136e4 2de9     +MOV R30 , R9
+0136e5 2dfa     +MOV R31 , R10
                  	__GETW1R 9,10
-0136e8 e3a0      	LDI  R26,LOW(48)
-0136e9 e0b0      	LDI  R27,HIGH(48)
-0136ea 940f 373b 	CALL __MULW12U
-0136ec 01bf      	MOVW R22,R30
-0136ed 2da3      	MOV  R26,R3
-0136ee e1e8      	LDI  R30,LOW(24)
-0136ef 9fea      	MUL  R30,R26
-0136f0 01f0      	MOVW R30,R0
+0136e6 e3a0      	LDI  R26,LOW(48)
+0136e7 e0b0      	LDI  R27,HIGH(48)
+0136e8 940f 3739 	CALL __MULW12U
+0136ea 01bf      	MOVW R22,R30
+0136eb 2da3      	MOV  R26,R3
+0136ec e1e8      	LDI  R30,LOW(24)
+0136ed 9fea      	MUL  R30,R26
+0136ee 01f0      	MOVW R30,R0
                 +
-0136f1 0f6e     +ADD R22 , R30
-0136f2 1f7f     +ADC R23 , R31
+0136ef 0f6e     +ADD R22 , R30
+0136f0 1f7f     +ADC R23 , R31
                  	__ADDWRR 22,23,30,31
-0136f3 2da5      	MOV  R26,R5
-0136f4 e0e3      	LDI  R30,LOW(3)
-0136f5 9fea      	MUL  R30,R26
-0136f6 01f0      	MOVW R30,R0
-0136f7 01db      	MOVW R26,R22
-0136f8 0fae      	ADD  R26,R30
-0136f9 1fbf      	ADC  R27,R31
-0136fa cfaa      	RJMP _GetData
+0136f1 2da5      	MOV  R26,R5
+0136f2 e0e3      	LDI  R30,LOW(3)
+0136f3 9fea      	MUL  R30,R26
+0136f4 01f0      	MOVW R30,R0
+0136f5 01db      	MOVW R26,R22
+0136f6 0fae      	ADD  R26,R30
+0136f7 1fbf      	ADC  R27,R31
+0136f8 cfaa      	RJMP _GetData
                  
                  ;OPTIMIZER ADDED SUBROUTINE, CALLED 3 TIMES, CODE SIZE REDUCTION:41 WORDS
                  SUBOPT_0x2:
-0136fb 924a      	ST   -Y,R4
+0136f9 924a      	ST   -Y,R4
                 +
-0136fc 2de9     +MOV R30 , R9
-0136fd 2dfa     +MOV R31 , R10
+0136fa 2de9     +MOV R30 , R9
+0136fb 2dfa     +MOV R31 , R10
                  	__GETW1R 9,10
-0136fe e3a0      	LDI  R26,LOW(48)
-0136ff e0b0      	LDI  R27,HIGH(48)
-013700 940f 373b 	CALL __MULW12U
-013702 01bf      	MOVW R22,R30
-013703 2da3      	MOV  R26,R3
-013704 e1e8      	LDI  R30,LOW(24)
-013705 9fea      	MUL  R30,R26
-013706 01f0      	MOVW R30,R0
+0136fc e3a0      	LDI  R26,LOW(48)
+0136fd e0b0      	LDI  R27,HIGH(48)
+0136fe 940f 3739 	CALL __MULW12U
+013700 01bf      	MOVW R22,R30
+013701 2da3      	MOV  R26,R3
+013702 e1e8      	LDI  R30,LOW(24)
+013703 9fea      	MUL  R30,R26
+013704 01f0      	MOVW R30,R0
                 +
-013707 0f6e     +ADD R22 , R30
-013708 1f7f     +ADC R23 , R31
+013705 0f6e     +ADD R22 , R30
+013706 1f7f     +ADC R23 , R31
                  	__ADDWRR 22,23,30,31
-013709 2da5      	MOV  R26,R5
-01370a e0e3      	LDI  R30,LOW(3)
-01370b 9fea      	MUL  R30,R26
-01370c 01f0      	MOVW R30,R0
-01370d 01db      	MOVW R26,R22
-01370e 0fae      	ADD  R26,R30
-01370f 1fbf      	ADC  R27,R31
-013710 9611      	ADIW R26,1
-013711 cf93      	RJMP _GetData
+013707 2da5      	MOV  R26,R5
+013708 e0e3      	LDI  R30,LOW(3)
+013709 9fea      	MUL  R30,R26
+01370a 01f0      	MOVW R30,R0
+01370b 01db      	MOVW R26,R22
+01370c 0fae      	ADD  R26,R30
+01370d 1fbf      	ADC  R27,R31
+01370e 9611      	ADIW R26,1
+01370f cf93      	RJMP _GetData
                  
                  ;OPTIMIZER ADDED SUBROUTINE, CALLED 3 TIMES, CODE SIZE REDUCTION:29 WORDS
                  SUBOPT_0x3:
-013712 91e0 0108 	LDS  R30,264
-013714 60e1      	ORI  R30,1
-013715 93e0 0108 	STS  264,R30
+013710 91e0 0108 	LDS  R30,264
+013712 60e1      	ORI  R30,1
+013713 93e0 0108 	STS  264,R30
                 +
-013717 e480     +LDI R24 , LOW ( 320 )
-013718 e091     +LDI R25 , HIGH ( 320 )
+013715 e480     +LDI R24 , LOW ( 320 )
+013716 e091     +LDI R25 , HIGH ( 320 )
                 +__DELAY_USW_LOOP :
-013719 9701     +SBIW R24 , 1
-01371a f7f1     +BRNE __DELAY_USW_LOOP
+013717 9701     +SBIW R24 , 1
+013718 f7f1     +BRNE __DELAY_USW_LOOP
                  	__DELAY_USW 320
-01371b 91e0 0108 	LDS  R30,264
-01371d 7fee      	ANDI R30,0xFE
-01371e 93e0 0108 	STS  264,R30
+013719 91e0 0108 	LDS  R30,264
+01371b 7fee      	ANDI R30,0xFE
+01371c 93e0 0108 	STS  264,R30
                 +
-013720 e480     +LDI R24 , LOW ( 320 )
-013721 e091     +LDI R25 , HIGH ( 320 )
+01371e e480     +LDI R24 , LOW ( 320 )
+01371f e091     +LDI R25 , HIGH ( 320 )
                 +__DELAY_USW_LOOP :
-013722 9701     +SBIW R24 , 1
-013723 f7f1     +BRNE __DELAY_USW_LOOP
+013720 9701     +SBIW R24 , 1
+013721 f7f1     +BRNE __DELAY_USW_LOOP
                  	__DELAY_USW 320
-013724 9508      	RET
+013722 9508      	RET
                  
                  ;OPTIMIZER ADDED SUBROUTINE, CALLED 4 TIMES, CODE SIZE REDUCTION:9 WORDS
                  SUBOPT_0x4:
+013723 93ea      	ST   -Y,R30
+013724 e0e0      	LDI  R30,LOW(0)
 013725 93ea      	ST   -Y,R30
-013726 e0e0      	LDI  R30,LOW(0)
-013727 93ea      	ST   -Y,R30
-013728 e0a0      	LDI  R26,LOW(0)
-013729 cee7      	RJMP _LCD_send_command
+013726 e0a0      	LDI  R26,LOW(0)
+013727 cee7      	RJMP _LCD_send_command
                  
                  ;OPTIMIZER ADDED SUBROUTINE, CALLED 2 TIMES, CODE SIZE REDUCTION:2 WORDS
                  SUBOPT_0x5:
-01372a 93ea      	ST   -Y,R30
-01372b e0a0      	LDI  R26,LOW(0)
-01372c dee4      	RCALL _LCD_send_command
+013728 93ea      	ST   -Y,R30
+013729 e0a0      	LDI  R26,LOW(0)
+01372a dee4      	RCALL _LCD_send_command
                 +
-01372d ec85     +LDI R24 , LOW ( 197 )
+01372b ec85     +LDI R24 , LOW ( 197 )
                 +__DELAY_USB_LOOP :
-01372e 958a     +DEC R24
-01372f f7f1     +BRNE __DELAY_USB_LOOP
+01372c 958a     +DEC R24
+01372d f7f1     +BRNE __DELAY_USB_LOOP
                  	__DELAY_USB 197
-013730 9508      	RET
+01372e 9508      	RET
                  
                  ;RUNTIME LIBRARY
                  
                  	.CSEG
                  __SAVELOCR4:
-013731 933a      	ST   -Y,R19
+01372f 933a      	ST   -Y,R19
                  __SAVELOCR3:
-013732 932a      	ST   -Y,R18
+013730 932a      	ST   -Y,R18
                  __SAVELOCR2:
-013733 931a      	ST   -Y,R17
-013734 930a      	ST   -Y,R16
-013735 9508      	RET
+013731 931a      	ST   -Y,R17
+013732 930a      	ST   -Y,R16
+013733 9508      	RET
                  
                  __LOADLOCR4:
-013736 813b      	LDD  R19,Y+3
+013734 813b      	LDD  R19,Y+3
                  __LOADLOCR3:
-013737 812a      	LDD  R18,Y+2
+013735 812a      	LDD  R18,Y+2
                  __LOADLOCR2:
-013738 8119      	LDD  R17,Y+1
-013739 8108      	LD   R16,Y
-01373a 9508      	RET
+013736 8119      	LDD  R17,Y+1
+013737 8108      	LD   R16,Y
+013738 9508      	RET
                  
                  __MULW12U:
-01373b 9ffa      	MUL  R31,R26
-01373c 2df0      	MOV  R31,R0
-01373d 9feb      	MUL  R30,R27
-01373e 0df0      	ADD  R31,R0
-01373f 9fea      	MUL  R30,R26
-013740 2de0      	MOV  R30,R0
-013741 0df1      	ADD  R31,R1
-013742 9508      	RET
+013739 9ffa      	MUL  R31,R26
+01373a 2df0      	MOV  R31,R0
+01373b 9feb      	MUL  R30,R27
+01373c 0df0      	ADD  R31,R0
+01373d 9fea      	MUL  R30,R26
+01373e 2de0      	MOV  R30,R0
+01373f 0df1      	ADD  R31,R1
+013740 9508      	RET
                  
                  _delay_ms:
-013743 9610      	adiw r26,0
-013744 f039      	breq __delay_ms1
+013741 9610      	adiw r26,0
+013742 f039      	breq __delay_ms1
                  __delay_ms0:
-013745 95a8      	wdr
+013743 95a8      	wdr
                 +
-013746 ea80     +LDI R24 , LOW ( 0xFA0 )
-013747 e09f     +LDI R25 , HIGH ( 0xFA0 )
+013744 ea80     +LDI R24 , LOW ( 0xFA0 )
+013745 e09f     +LDI R25 , HIGH ( 0xFA0 )
                 +__DELAY_USW_LOOP :
-013748 9701     +SBIW R24 , 1
-013749 f7f1     +BRNE __DELAY_USW_LOOP
+013746 9701     +SBIW R24 , 1
+013747 f7f1     +BRNE __DELAY_USW_LOOP
                  	__DELAY_USW 0xFA0
-01374a 9711      	sbiw r26,1
-01374b f7c9      	brne __delay_ms0
+013748 9711      	sbiw r26,1
+013749 f7c9      	brne __delay_ms0
                  __delay_ms1:
-01374c 9508      	ret
+01374a 9508      	ret
                  
                  ;END OF CODE MARKER
                  __END_OF_CODE:
@@ -91318,9 +91316,9 @@ counted separately from r26..r31 here.
 
 ATmega2560 register use summary:
 r0 :  17 r1 :   4 r2 :   0 r3 :   7 r4 :   6 r5 :   7 r6 :   5 r7 :   0 
-r8 :   3 r9 :   8 r10:   8 r11:   0 r12:   0 r13:   0 r14:   0 r15:   2 
+r8 :   4 r9 :   8 r10:   8 r11:   0 r12:   0 r13:   0 r14:   0 r15:   2 
 r16:  15 r17:  20 r18:   4 r19:   6 r20:   0 r21:   0 r22:  24 r23:   8 
-r24:  29 r25:   8 r26:  94 r27:  23 r28:   7 r29:   5 r30: 319 r31:  50 
+r24:  29 r25:   8 r26:  92 r27:  23 r28:   7 r29:   5 r30: 320 r31:  49 
 x  :  12 y  :  57 z  :  12 
 Registers used: 27 out of 35 (77.1%)
 
@@ -91329,17 +91327,17 @@ ATmega2560 instruction use summary:
 adiw  :   7 and   :   0 andi  :   9 asr   :   0 bclr  :   0 bld   :   0 
 brbc  :   0 brbs  :   0 brcc  :   0 brcs  :   0 break :   0 breq  :   4 
 brge  :   0 brhc  :   0 brhs  :   0 brid  :   0 brie  :   0 brlo  :   3 
-brlt  :   0 brmi  :   0 brne  :  31 brpl  :   0 brsh  :   2 brtc  :   0 
+brlt  :   0 brmi  :   0 brne  :  30 brpl  :   0 brsh  :   3 brtc  :   0 
 brts  :   0 brvc  :   0 brvs  :   0 bset  :   1 bst   :   0 call  :   4 
 cbi   :   0 cbr   :   0 clc   :   0 clh   :   0 cli   :   1 cln   :   0 
 clr   :  18 cls   :   0 clt   :   0 clv   :   0 clz   :   0 com   :   0 
-cp    :   6 cpc   :  13 cpi   :  15 cpse  :   0 dec   :   7 des   :   0 
+cp    :   7 cpc   :  12 cpi   :  14 cpse  :   0 dec   :   7 des   :   0 
 eicall:   0 eijmp :   0 elpm  :  12 eor   :   0 fmul  :   0 fmuls :   0 
 fmulsu:   0 icall :   0 ijmp  :   0 in    :   4 inc   :   5 jmp   :  58 
 ld    :  19 ldd   :   9 ldi   : 118 lds   :   9 lpm   :   0 lsl   :   2 
 lsr   :   6 mov   :  25 movw  :  24 mul   :  11 muls  :   0 mulsu :   0 
 neg   :   0 nop   :   0 or    :   2 ori   :   4 out   :  38 pop   :  10 
-push  :  10 rcall :  44 ret   :  14 reti  :   1 rjmp  :  31 rol   :   0 
+push  :  10 rcall :  44 ret   :  14 reti  :   1 rjmp  :  30 rol   :   0 
 ror   :   0 sbc   :   0 sbci  :   7 sbi   :   0 sbic  :   0 sbis  :   0 
 sbiw  :  11 sbr   :   0 sbrc  :   0 sbrs  :   0 sec   :   0 seh   :   0 
 sei   :   0 sen   :   0 ser   :   0 ses   :   0 set   :   0 sev   :   0 
@@ -91350,7 +91348,7 @@ Instructions used: 45 out of 119 (37.8%)
 ATmega2560 memory use summary [bytes]:
 Segment   Begin    End      Code   Data   Used    Size   Use%
 ---------------------------------------------------------------
-[.cseg] 0x000000 0x026e9a   1880 157506 159386  262144  60.8%
+[.cseg] 0x000000 0x026e96   1876 157506 159382  262144  60.8%
 [.dseg] 0x000200 0x000a40      0     64     64    8192   0.8%
 [.eseg] 0x000000 0x000000      0      0      0    4096   0.0%
 

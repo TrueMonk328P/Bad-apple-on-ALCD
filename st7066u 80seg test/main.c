@@ -4,10 +4,10 @@ Automatic Program Generator
 © Copyright 1998-2020 Pavel Haiduc, HP InfoTech S.R.L.
 http://www.hpinfotech.ro
 
-Project : 
-Version : 
-Date    : 08.05.2025
-Author  : 
+Project : Bad apple on alfa numerical LCD
+Version : v3.1
+Date    : 25.05.2025
+Author  : J_MAN
 Company : 
 Comments: 
 
@@ -15,7 +15,7 @@ Comments:
 Chip type               : ATmega2560
 Program type            : Application
 AVR Core Clock frequency: 16,000000 MHz
-Memory model            : Small
+Memory model            : Largr
 External RAM size       : 0
 Data Stack size         : 2048
 *******************************************************/
@@ -16790,17 +16790,17 @@ void main(void)
 
     /*TCCR0A = (0 << COM0A1) | (0 << COM0A0) | (0 << COM0B1) | (0 << COM0B0) | (1 << WGM01) | (0 << WGM00);
     TCCR0B = (0 << WGM02) | (0 << CS02) | (1 << CS01) | (1 << CS00);
-    
+
     OCR0A = 250;
-    
+
     TIMSK0 = (0 << OCIE0B) | (1 << OCIE0A) | (0 << TOIE0);*/
 
     TCCR1A = (0 << COM1A1) | (0 << COM1A0) | (0 << COM1B1) | (0 << COM1B0) | (0 << COM1C1) | (0 << COM1C0) | (0 << WGM11) | (0 << WGM10);
     TCCR1B = (0 << ICNC1) | (0 << ICES1) | (0 << WGM13) | (1 << WGM12) | (0 << CS12) | (1 << CS11) | (1 << CS10);
-    
+
     OCR1AH = 0x41;
-    OCR1AL = 0x1A;//I will add stabilizer later for 16666 16666 16667 thing
-    
+    OCR1AL = 0x1A;//I added stabilizer for 16666 16666 16667 thing
+
     TIMSK1 = (0 << ICIE1) | (0 << OCIE1C) | (0 << OCIE1B) | (1 << OCIE1A) | (0 << TOIE1);
 
     SREG |= 1 << 7;
@@ -16843,7 +16843,7 @@ void main(void)
     LCD_putc(millis % 10 + '0');*/
 }
 
-interrupt [18] void tim1_coma (void)
+interrupt[18] void tim1_coma(void)
 {
     for (y = 0; y < 2; y++) {
         for (x = 0; x < 4; x++) {
@@ -16874,14 +16874,13 @@ interrupt [18] void tim1_coma (void)
         part++;
     }
     //stabilizator
-    stb++;
     switch (stb) {
-    case 0:OCR1AL -= 1; break;
-    case 1:break;
-    case 2:OCR1AL += 1; break;
-    case 3:stb = 0; break;
+    case 0: break;                   //16666 0
+    case 1: OCR1AL += 1; break;      //16666 +1
+    case 2: OCR1AL -= 1; break;      //16667 -1  
     default:TIMSK1 &= ~(1 << OCIE1A);
     }
+    if (++stb > 2)stb = 0;
 }
 
 //interrupt [22] void tim0_coma (void)
@@ -16897,7 +16896,7 @@ void LCD_send_command(unsigned char dat, unsigned char rs, unsigned char rw) {
     if (rw == 1) PORTK |= 1 << RW;
     else PORTK &= ~(1 << RW);
     DB = dat;
-    
+
     PORTK |= 1 << E; delay_us(etime);
     PORTK &= ~(1 << E); delay_us(etime);
 }
@@ -16993,7 +16992,7 @@ void LCD_init(void) {
     delay_us(shrDelay);
 }
 
-unsigned char GetData(unsigned char s,unsigned short l) {
+unsigned char GetData(unsigned char s, unsigned short l) {
     switch (s)
     {
     case 0:return arr1[l];

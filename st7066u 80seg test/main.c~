@@ -4,10 +4,10 @@ Automatic Program Generator
 © Copyright 1998-2020 Pavel Haiduc, HP InfoTech S.R.L.
 http://www.hpinfotech.ro
 
-Project : 
-Version : 
-Date    : 08.05.2025
-Author  : 
+Project : Bad apple on alfa numerical LCD
+Version : v3.1
+Date    : 25.05.2025
+Author  : J_MAN
 Company : 
 Comments: 
 
@@ -15,7 +15,7 @@ Comments:
 Chip type               : ATmega2560
 Program type            : Application
 AVR Core Clock frequency: 16,000000 MHz
-Memory model            : Small
+Memory model            : Largr
 External RAM size       : 0
 Data Stack size         : 2048
 *******************************************************/
@@ -44,8 +44,8 @@ void LCD_init(void);
 unsigned char GetData(unsigned char s, unsigned short l);
 
 char symCodes[64] = { 0 };
-unsigned char part = 0, y = 0, x = 0, lines = 0;
-unsigned short frame = 0, millis = 0, movf = 0, framecount = 0, fovf = 0;
+unsigned char part = 0, y = 0, x = 0, lines = 0, stb = 0;
+unsigned short frame = 0;//, millis = 0, movf = 0, framecount = 0, fovf = 0;
 //unsigned char str[10] = { 0 };
 const unsigned char etime = 80, shrDelay = 37;
 //const unsigned short lngDelay = 1520;
@@ -16787,60 +16787,32 @@ void main(void)
     LCD_putc(5);
     LCD_putc(6);
     LCD_putc(7);
-    TCCR0A = (0 << COM0A1) | (0 << COM0A0) | (0 << COM0B1) | (0 << COM0B0) | (1 << WGM01) | (0 << WGM00);
+
+    /*TCCR0A = (0 << COM0A1) | (0 << COM0A0) | (0 << COM0B1) | (0 << COM0B0) | (1 << WGM01) | (0 << WGM00);
     TCCR0B = (0 << WGM02) | (0 << CS02) | (1 << CS01) | (1 << CS00);
-    
+
     OCR0A = 250;
-    
-    TIMSK0 = (0 << OCIE0B) | (1 << OCIE0A) | (0 << TOIE0);
+
+    TIMSK0 = (0 << OCIE0B) | (1 << OCIE0A) | (0 << TOIE0);*/
 
     TCCR1A = (0 << COM1A1) | (0 << COM1A0) | (0 << COM1B1) | (0 << COM1B0) | (0 << COM1C1) | (0 << COM1C0) | (0 << WGM11) | (0 << WGM10);
-    TCCR1B = (0 << ICNC1) | (0 << ICES1) | (0 << WGM13) | (1 << WGM12) | (1 << CS12) | (0 << CS11) | (1 << CS10);
-    
+    TCCR1B = (0 << ICNC1) | (0 << ICES1) | (0 << WGM13) | (1 << WGM12) | (0 << CS12) | (1 << CS11) | (1 << CS10);
+
     OCR1AH = 0x41;
-    OCR1AL = 0x1A;//I will add stabilizer later for 16666 16666 16667 thing
-    
+    OCR1AL = 0x1A;//I added stabilizer for 16666 16666 16667 thing
+
     TIMSK1 = (0 << ICIE1) | (0 << OCIE1C) | (0 << OCIE1B) | (1 << OCIE1A) | (0 << TOIE1);
 
     SREG |= 1 << 7;
     while (1)
     {
         // Place your code here
-        for (y = 0; y < 2; y++) {
-            for (x = 0; x < 4; x++) {
-                for (lines = 0; lines < 8; lines++) {
-                    switch (x)
-                    {
-                    case 0:symCodes[y * 32 + x * 8 + lines] = GetData(part, frame * 48 + y * 24 + lines * 3) >> 3; break;
-                    case 1:symCodes[y * 32 + x * 8 + lines] = GetData(part, frame * 48 + y * 24 + lines * 3) << 2 | GetData(part, frame * 48 + y * 24 + lines * 3 + 1) >> 6; break;
-                    case 2:symCodes[y * 32 + x * 8 + lines] = GetData(part, frame * 48 + y * 24 + lines * 3 + 1) >> 1; break;
-                    case 3:symCodes[y * 32 + x * 8 + lines] = GetData(part, frame * 48 + y * 24 + lines * 3 + 1) << 4 | GetData(part, frame * 48 + y * 24 + lines * 3 + 2) >> 4; break;
-                    default:
-                        break;
-                    }
-                    //0-7 8-15 16-23 24-31
-                    //32-39 40-47 48-55 56-63
-                }
-            }
-        }
-        LCD_CGRAM64(symCodes);
-        //delay_ms(6);
-        //delay_us(944);
-        frame++;
-        framecount++;
-        if (part == 2 && frame == 550) {
-            part = 0;
-            frame = 0;
-        }
-        if (frame == 1365) {
-            frame = 0;
-            part++;
-        }
-        if (framecount == 65535)fovf++;
+        //code moved in tim1_coma
+        /*if (framecount == 65535)fovf++;
         if ((framecount == 34463) && (fovf == 1)) {
             SREG &= ~(1 << 7);
             break;
-        }
+        }*/
         //v2 speedtest
         //frame/time/fps
         //   1 59ms     16,949
@@ -16859,7 +16831,7 @@ void main(void)
         // 9999 143070ms  69,888
         //99999 1426207ms 70,115
     }
-    LCD_clr();
+    /*LCD_clr();
     LCD_goto(0, 0);
     LCD_putc(movf / 10 % 10 + '0');
     LCD_putc(movf % 10 + '0');
@@ -16868,14 +16840,54 @@ void main(void)
     LCD_putc(millis / 1000 % 10 + '0');
     LCD_putc(millis / 100 % 10 + '0');
     LCD_putc(millis / 10 % 10 + '0');
-    LCD_putc(millis % 10 + '0');
+    LCD_putc(millis % 10 + '0');*/
 }
 
-interrupt [22] void tim0_coma (void)
+interrupt[18] void tim1_coma(void)
 {
-    millis++;
-    if (millis == 65535)movf++;
+    for (y = 0; y < 2; y++) {
+        for (x = 0; x < 4; x++) {
+            for (lines = 0; lines < 8; lines++) {
+                switch (x)
+                {
+                case 0:symCodes[y * 32 + x * 8 + lines] = GetData(part, frame * 48 + y * 24 + lines * 3) >> 3; break;
+                case 1:symCodes[y * 32 + x * 8 + lines] = GetData(part, frame * 48 + y * 24 + lines * 3) << 2 | GetData(part, frame * 48 + y * 24 + lines * 3 + 1) >> 6; break;
+                case 2:symCodes[y * 32 + x * 8 + lines] = GetData(part, frame * 48 + y * 24 + lines * 3 + 1) >> 1; break;
+                case 3:symCodes[y * 32 + x * 8 + lines] = GetData(part, frame * 48 + y * 24 + lines * 3 + 1) << 4 | GetData(part, frame * 48 + y * 24 + lines * 3 + 2) >> 4; break;
+                default:
+                    break;
+                }
+                //0-7 8-15 16-23 24-31
+                //32-39 40-47 48-55 56-63
+            }
+        }
+    }
+    LCD_CGRAM64(symCodes);
+    frame++;
+    //framecount++;
+    if (part == 2 && frame == 550) {
+        part = 0;
+        frame = 0;
+    }
+    if (frame == 1365) {
+        frame = 0;
+        part++;
+    }
+    //stabilizator
+    switch (stb) {
+    case 0:OCR1AL -= 1; break;
+    case 1:break;
+    case 2:OCR1AL += 1; stb = 0; break;
+    default:TIMSK1 &= ~(1 << OCIE1A);
+    }
+    stb++;
 }
+
+//interrupt [22] void tim0_coma (void)
+//{
+//    millis++;
+//    if (millis == 65535)movf++;
+//}
 
 void LCD_send_command(unsigned char dat, unsigned char rs, unsigned char rw) {
     if (rs == 1) PORTK |= 1 << RS;
@@ -16884,7 +16896,7 @@ void LCD_send_command(unsigned char dat, unsigned char rs, unsigned char rw) {
     if (rw == 1) PORTK |= 1 << RW;
     else PORTK &= ~(1 << RW);
     DB = dat;
-    
+
     PORTK |= 1 << E; delay_us(etime);
     PORTK &= ~(1 << E); delay_us(etime);
 }
@@ -16980,7 +16992,7 @@ void LCD_init(void) {
     delay_us(shrDelay);
 }
 
-unsigned char GetData(unsigned char s,unsigned short l) {
+unsigned char GetData(unsigned char s, unsigned short l) {
     switch (s)
     {
     case 0:return arr1[l];

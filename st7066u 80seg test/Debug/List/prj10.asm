@@ -31340,7 +31340,7 @@ _main:
 ; 0000 41A1 OCR1AH = 0x41;
 	LDI  R30,LOW(65)
 	STS  137,R30
-; 0000 41A2 OCR1AL = 0x1A;//I will add stabilizer later for 16666 16666 16667 thing
+; 0000 41A2 OCR1AL = 0x1A;//I added stabilizer for 16666 16666 16667 thing
 	LDI  R30,LOW(26)
 	STS  136,R30
 ; 0000 41A3 
@@ -31354,7 +31354,7 @@ _main:
 _0x3:
 ; 0000 41A8 {
 ; 0000 41A9 // Place your code here
-; 0000 41AA 
+; 0000 41AA //code moved in tim1_coma
 ; 0000 41AB /*if (framecount == 65535)fovf++;
 ; 0000 41AC if ((framecount == 34463) && (fovf == 1)) {
 ; 0000 41AD SREG &= ~(1 << 7);
@@ -31393,7 +31393,7 @@ _0x3:
 _0x6:
 	RJMP _0x6
 ; .FEND
-;interrupt [18] void tim1_coma (void)
+;interrupt[18] void tim1_coma(void)
 ; 0000 41CF {
 _tim1_coma:
 ; .FSTART _tim1_coma
@@ -31591,54 +31591,52 @@ _0x18:
 ; 0000 41EA part++;
 	INC  R4
 ; 0000 41EB }
-; 0000 41EC stb++;
-_0x1B:
-	INC  R8
+; 0000 41EC //stabilizator
 ; 0000 41ED switch (stb) {
+_0x1B:
 	MOV  R30,R8
 	LDI  R31,0
-; 0000 41EE case 0:OCR1AL -= 1; break;
+; 0000 41EE case 0: break;                   //16666 0
 	SBIW R30,0
-	BRNE _0x1F
-	LDI  R26,LOW(136)
-	LDI  R27,HIGH(136)
-	LD   R30,X
-	SUBI R30,LOW(1)
-	ST   X,R30
-	RJMP _0x1E
-; 0000 41EF case 1:break;
-_0x1F:
+	BREQ _0x1E
+; 0000 41EF case 1: OCR1AL += 1; break;      //16666 +1
 	CPI  R30,LOW(0x1)
 	LDI  R26,HIGH(0x1)
 	CPC  R31,R26
-	BREQ _0x1E
-; 0000 41F0 case 2:OCR1AL += 1; break;
-	CPI  R30,LOW(0x2)
-	LDI  R26,HIGH(0x2)
-	CPC  R31,R26
-	BRNE _0x21
+	BRNE _0x20
 	LDI  R26,LOW(136)
 	LDI  R27,HIGH(136)
 	LD   R30,X
 	SUBI R30,-LOW(1)
 	ST   X,R30
 	RJMP _0x1E
-; 0000 41F1 case 3:stb = 0; break;
-_0x21:
-	CPI  R30,LOW(0x3)
-	LDI  R26,HIGH(0x3)
+; 0000 41F0 case 2: OCR1AL -= 1; break;      //16667 -1
+_0x20:
+	CPI  R30,LOW(0x2)
+	LDI  R26,HIGH(0x2)
 	CPC  R31,R26
-	BRNE _0x23
-	CLR  R8
+	BRNE _0x22
+	LDI  R26,LOW(136)
+	LDI  R27,HIGH(136)
+	LD   R30,X
+	SUBI R30,LOW(1)
+	ST   X,R30
 	RJMP _0x1E
-; 0000 41F2 default:TIMSK1 &= ~(1 << OCIE1A);
-_0x23:
+; 0000 41F1 default:TIMSK1 &= ~(1 << OCIE1A);
+_0x22:
 	LDS  R30,111
 	ANDI R30,0xFD
 	STS  111,R30
-; 0000 41F3 }
+; 0000 41F2 }
 _0x1E:
+; 0000 41F3 if (++stb > 2)stb = 0;
+	INC  R8
+	LDI  R30,LOW(2)
+	CP   R30,R8
+	BRSH _0x23
+	CLR  R8
 ; 0000 41F4 }
+_0x23:
 	LD   R30,Y+
 	OUT  SREG,R30
 	LD   R30,Y+
@@ -31939,8 +31937,8 @@ _0x2000002:
 ; 0000 4261 }
 	RET
 ; .FEND
-;unsigned char GetData(unsigned char s,unsigned short l) {
-; 0000 4263 unsigned char GetData(unsigned char s,unsigned short l) {
+;unsigned char GetData(unsigned char s, unsigned short l) {
+; 0000 4263 unsigned char GetData(unsigned char s, unsigned short l) {
 _GetData:
 ; .FSTART _GetData
 ; 0000 4264 switch (s)
