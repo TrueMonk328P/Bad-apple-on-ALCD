@@ -37,3 +37,4 @@ v3.1 - All values in delays functions on most LCD functions changed to constants
      - Frame processing was moved from infinite loop to tim1_ocra interrupt function. For a precision timing beatween frames stabilizer was added.
      
      - max fps increased to 69(nice).888 fps. That mean you can run 30fps video using 4bit data bus.
+v3.2 - fixed error in a frame timing stabilizer
